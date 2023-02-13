@@ -45,27 +45,96 @@ diffs_meses=list()
 foras_meses=list()
 exc_meses=list()
 
+micro_exc_list=list()
+pequena_exc_list=list()
+media_exc_list=list()
+grande_exc_list=list()
+nao_identificado_exc_list=list()
+
+micro_for_list=list()
+pequena_for_list=list()
+media_for_list=list()
+grande_for_list=list()
+nao_identificado_for_list=list()
+
+
 for(mes in meses){
   total_exc=0
   total_foras=0
   diff=0
-
-      for (i in exclusoes){
-        NEexc = filter(i, região==2)
-        NEexc = filter(NEexc, competênciamov==mes)
-        total_exc=total_exc+(sum(NEexc$saldomovimentação))
-      }
+  
+  total_micro_exc=0
+  total_pequena_exc=0
+  total_media_exc=0
+  total_grande_exc=0
+  total_nao_identificado_exc=0
+  
+  total_micro_for=0
+  total_pequena_for=0
+  total_media_for=0
+  total_grande_for=0
+  total_nao_identificado_for=0
+  
+  for (i in exclusoes){
+    #NEexc = filter(i, região==2)
+    NEexc = filter(i, competênciamov==mes)
+    total_exc=total_exc+(sum(NEexc$saldomovimentação))
     
-      for (i in foras){
-        NEfor = filter(i, região==2)
-        NEfor = filter(NEfor, competênciamov==mes)
-        total_foras=total_foras+(sum(NEfor$saldomovimentação))
-      }
-      
+    micro_exc = filter(NEexc, tamestabjan == 1 | tamestabjan == 2 | tamestabjan == 3 | tamestabjan == 4 )
+    total_micro_exc=total_micro_exc+(sum(micro_exc$saldomovimentação))
+    
+    pequena_exc = filter(NEexc, tamestabjan == 5 | tamestabjan == 6)
+    total_pequena_exc=total_pequena_exc+(sum(pequena_exc$saldomovimentação))
+    
+    media_exc = filter(NEexc, tamestabjan == 7 | tamestabjan == 8)
+    total_media_exc=total_media_exc+(sum(media_exc$saldomovimentação))
+    
+    grande_exc = filter(NEexc, tamestabjan == 9 | tamestabjan == 10)
+    total_grande_exc=total_grande_exc+(sum(grande_exc$saldomovimentação))
+    
+    nao_identificado_exc = filter(NEexc, tamestabjan == 99)
+    total_nao_identificado_exc=total_nao_identificado_exc+(sum(nao_identificado_exc$saldomovimentação))
+    
+  }
+  
+  for (i in foras){
+    #NEfor = filter(i, região==2)
+    NEfor = filter(i, competênciamov==mes)
+    total_foras=total_foras+(sum(NEfor$saldomovimentação))
+    
+    micro_for = filter(NEfor, tamestabjan == 1 | tamestabjan == 2 | tamestabjan == 3 | tamestabjan == 4 )
+    total_micro_for=total_micro_for+(sum(micro_for$saldomovimentação))
+    
+    pequena_for = filter(NEfor, tamestabjan == 5 | tamestabjan == 6)
+    total_pequena_for=total_pequena_for+(sum(pequena_for$saldomovimentação))
+    
+    media_for = filter(NEfor, tamestabjan == 7 | tamestabjan == 8)
+    total_media_for=total_media_for+(sum(media_for$saldomovimentação))
+    
+    grande_for = filter(NEfor, tamestabjan == 9 | tamestabjan == 10)
+    total_grande_for=total_grande_for+(sum(grande_for$saldomovimentação))
+    
+    nao_identificado_for = filter(NEfor, tamestabjan == 99)
+    total_nao_identificado_for=total_nao_identificado_for+(sum(nao_identificado_for$saldomovimentação))
+    
+  }
+  
   diff = total_foras-total_exc
   diffs_meses = append(diffs_meses, diff)
   foras_meses=append(foras_meses, total_foras)
   exc_meses=append(exc_meses, total_exc)
-  }
+  
+  micro_exc_list=append(micro_exc_list, total_micro_exc)
+  pequena_exc_list=append(pequena_exc_list, total_pequena_exc)
+  media_exc_list=append(media_exc_list, total_media_exc)
+  grande_exc_list=append(grande_exc_list, total_grande_exc)
+  nao_identificado_exc_list=append(nao_identificado_exc_list, total_nao_identificado_exc)
+  
+  micro_for_list=append(micro_for_list, total_micro_for)
+  pequena_for_list=append(pequena_for_list, total_pequena_for)
+  media_for_list=append(media_for_list, total_media_for)
+  grande_for_list=append(grande_for_list, total_grande_for)
+  nao_identificado_for_list=append(nao_identificado_for_list, total_nao_identificado_for)
+}
 
-print(diffs_meses)
+print(nao_identificado_for_list)
