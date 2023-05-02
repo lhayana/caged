@@ -39,11 +39,8 @@ colnames(excluir) %in% colnames(caged_1_mov)
 ###colnames(rn) %in% colnames(excluir)
 excluir = select(excluir, -c(26, 27))
 
-#selecionando as linhas que devem ser excluídas
-inner = inner_join(excluir,rn)
-
 #tirando as linhas que devem ser excluídas
-rn_janeiro = anti_join(rn, inner)
+rn_janeiro = anti_join(rn, excluir)
 
 sum(rn_janeiro$saldomovimentação) 
 #se o saldo não bate, há linhas que foram excluídas por serem duplicadas
