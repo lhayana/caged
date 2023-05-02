@@ -54,5 +54,7 @@ repetida = inner[16,] #adicionando a linha duplicada
 
 rn_janeiro = rbind(rn_janeiro, repetida)
 
+sum(rn_janeiro$saldomovimentação) #verificar se bate com o total da dash do MTE
+
 #exportando para csv. Mudar o caminho.
 write.csv2(rn_janeiro, file = "C:/Users/Lhayana/Downloads/caged23/rn_janeiro.csv")
