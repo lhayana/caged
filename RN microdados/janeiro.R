@@ -42,7 +42,7 @@ excluir = select(excluir, -c(26, 27))
 #tirando as linhas que devem ser excluídas
 rn_janeiro = anti_join(rn, excluir)
 
-sum(rn_janeiro$saldomovimentação) 
+sum(rn_janeiro$saldomovimentação)
 #se o saldo não bate, há linhas que foram excluídas por serem duplicadas
 
 inner = inner_join(excluir,rn)
